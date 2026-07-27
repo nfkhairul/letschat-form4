@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fan Club · Form 4 English · SMK RPS Betau</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0B1026;
+  --night2:#1A1F47;
+  --parch:#F7EEDA;
+  --parch2:#EADCBE;
+  --gold:#E7B24C;
+  --ember:#D2503F;
+  --teal:#28A98C;
+  --violet:#8B6BD9;
+  --line:#0B1026;
+  --sh:6px 6px 0 var(--line);
+  --sh-sm:3px 3px 0 var(--line);
+  --display:'Cinzel',Georgia,serif;
+  --body:'Nunito',system-ui,sans-serif;
+  --mono:'Space Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--body);color:var(--parch);min-height:100vh;padding:0 0 90px;
+  background:
+    radial-gradient(2px 2px at 12% 18%,rgba(255,255,255,.9),transparent 100%),
+    radial-gradient(2px 2px at 68% 9%,rgba(255,255,255,.7),transparent 100%),
+    radial-gradient(1.6px 1.6px at 32% 62%,rgba(255,255,255,.6),transparent 100%),
+    radial-gradient(1.8px 1.8px at 84% 44%,rgba(255,255,255,.75),transparent 100%),
+    radial-gradient(2px 2px at 48% 88%,rgba(255,255,255,.55),transparent 100%),
+    radial-gradient(circle at 84% 6%,rgba(139,107,217,.42),transparent 46%),
+    radial-gradient(circle at 8% 74%,rgba(40,169,140,.30),transparent 44%),
+    linear-gradient(180deg,var(--night),#141A3A 60%,var(--night));
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.12;letter-spacing:.01em}
+button{font-family:inherit;cursor:pointer}
+input,textarea,select{font-family:inherit;font-size:1rem}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+
+/* cards are parchment on night */
+.card{
+  background:var(--parch);color:var(--night);border:3px solid var(--line);border-radius:6px;
+  box-shadow:var(--sh);padding:24px;position:relative;
+}
+.card + .card{margin-top:16px}
+.card::before{ /* corner fold */
+  content:"";position:absolute;top:0;right:0;border-width:0 26px 26px 0;border-style:solid;
+  border-color:transparent rgba(11,16,38,.14) transparent transparent;
+}
+.eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;opacity:.65}
+.btn{
+  border:3px solid var(--line);border-radius:4px;background:var(--gold);color:var(--night);
+  padding:11px 20px;font-family:var(--display);font-weight:800;font-size:.95rem;letter-spacing:.04em;
+  box-shadow:var(--sh-sm);transition:transform .12s,box-shadow .12s;text-transform:uppercase;
+}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--line)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--line)}
+.btn.teal{background:var(--teal);color:#04140F}
+.btn.ember{background:var(--ember);color:#fff}
+.btn.violet{background:var(--violet);color:#fff}
+.btn.ghost{background:transparent}
+.btn.sm{padding:7px 13px;font-size:.78rem;border-width:2px}
+.btn:disabled{opacity:.42;cursor:not-allowed;transform:none;box-shadow:var(--sh-sm)}
+.field{width:100%;padding:12px 14px;border:3px solid var(--line);border-radius:4px;background:#fff;color:var(--night)}
+.field::placeholder{color:#9c9483}
+label.lbl{display:block;font-weight:700;margin:0 0 6px;font-size:.94rem;color:var(--night)}
+.row{margin-bottom:14px}
+
+/* ---------- login ---------- */
+#login{min-height:100vh;display:grid;place-items:center;padding:26px 16px}
+.ticket{
+  display:grid;grid-template-columns:1.02fr .98fr;max-width:920px;width:100%;
+  border:4px solid var(--line);box-shadow:12px 12px 0 rgba(0,0,0,.5);background:var(--parch);
+  border-radius:8px;overflow:hidden;
+}
+.ticket-hero{
+  background:linear-gradient(165deg,#1C1348,#2B1B5E 45%,#0B1026);color:var(--parch);
+  padding:36px 30px;position:relative;overflow:hidden;
+}
+.ticket-hero::after{ /* perforation between stub and body */
+  content:"";position:absolute;top:0;bottom:0;right:-9px;width:18px;
+  background:radial-gradient(circle at 9px 9px,var(--parch) 6px,transparent 6.5px) 0 0/18px 18px repeat-y;
+}
+.ticket-hero .stub{font-family:var(--mono);font-size:.66rem;letter-spacing:.28em;opacity:.7}
+.ticket-hero h1{font-size:clamp(2rem,5vw,3rem);margin:14px 0 0;font-weight:900;letter-spacing:.02em}
+.ticket-hero h1 em{display:block;font-style:normal;color:var(--gold)}
+.ticket-hero p{margin-top:14px;font-weight:600;max-width:32ch;opacity:.92}
+.moon{position:absolute;right:34px;top:26px;width:66px;height:66px;border-radius:50%;
+  background:radial-gradient(circle at 34% 32%,#fff,var(--gold));box-shadow:0 0 40px rgba(231,178,76,.55)}
+.stars{margin-top:26px;display:flex;gap:6px;font-size:1.4rem;color:var(--gold)}
+.stars span{animation:tw 2.4s ease-in-out infinite}
+.stars span:nth-child(2){animation-delay:.3s}
+.stars span:nth-child(3){animation-delay:.6s}
+.stars span:nth-child(4){animation-delay:.9s}
+.stars span:nth-child(5){animation-delay:1.2s}
+@keyframes tw{0%,100%{opacity:.35;transform:scale(.86)}50%{opacity:1;transform:scale(1.12)}}
+.login-form{padding:34px 30px;color:var(--night)}
+.login-form h2{font-size:1.35rem}
+.login-form .sub{font-size:.88rem;opacity:.7;margin:4px 0 18px}
+.err{color:var(--ember);font-weight:700;font-size:.86rem;margin-top:8px;display:none}
+.note{font-size:.76rem;opacity:.66;margin-top:14px;line-height:1.55}
+
+/* ---------- header ---------- */
+header.top{position:sticky;top:0;z-index:40;padding:10px 0 0;
+  background:linear-gradient(180deg,rgba(11,16,38,.97),rgba(11,16,38,.8) 76%,transparent)}
+.badge-strip{
+  background:var(--parch);color:var(--night);border:3px solid var(--line);border-radius:6px;
+  display:flex;align-items:center;gap:14px;padding:10px 16px;box-shadow:var(--sh-sm);
+}
+.avatar{width:44px;height:44px;flex:none;border:3px solid var(--line);background:var(--violet);color:#fff;
+  display:grid;place-items:center;font-family:var(--display);font-weight:900;border-radius:4px}
+.who{min-width:0;line-height:1.18}
+.who b{font-family:var(--display);font-size:.98rem;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:34vw}
+.who span{font-family:var(--mono);font-size:.68rem;opacity:.7}
+.fp{margin-left:auto;text-align:right;flex:none}
+.fp .amt{font-family:var(--display);font-weight:900;font-size:1.4rem;line-height:1}
+.fp .amt.pop{animation:pop .45s ease}
+@keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.3) rotate(-3deg);color:var(--ember)}100%{transform:scale(1)}}
+.fp small{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
+
+/* film-reel progress */
+.reel{display:flex;gap:6px;overflow-x:auto;padding:12px 2px 10px;scrollbar-width:none}
+.reel::-webkit-scrollbar{display:none}
+.frame{
+  flex:none;width:40px;height:40px;border:3px solid var(--line);background:var(--parch);color:var(--night);
+  font-family:var(--display);font-weight:900;font-size:.92rem;display:grid;place-items:center;border-radius:3px;
+  position:relative;
+}
+.frame::after{content:"";position:absolute;left:2px;right:2px;top:-1px;height:3px;
+  background:repeating-linear-gradient(90deg,var(--line) 0 3px,transparent 3px 8px)}
+.frame.active{background:var(--gold);transform:scale(1.12);box-shadow:0 0 0 4px rgba(231,178,76,.3)}
+.frame.done{background:var(--teal)}
+.frame.done span{display:none}
+.frame.done::before{content:"\2713"}
+
+/* ---------- stages ---------- */
+.stage{display:none;animation:fadein .35s ease}
+.stage.on{display:block}
+@keyframes fadein{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.stage-head{margin:14px 2px 14px}
+.kicker{display:inline-block;background:var(--ember);color:#fff;border:3px solid var(--line);
+  padding:3px 13px;font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+  box-shadow:var(--sh-sm);border-radius:3px}
+.stage-head h2{font-size:clamp(1.6rem,4.4vw,2.4rem);margin-top:12px;text-shadow:3px 3px 0 rgba(0,0,0,.45)}
+.stage-head p{margin-top:8px;font-weight:600;opacity:.9;max-width:64ch}
+.objective{background:var(--parch2);color:var(--night);border:3px dashed var(--line);border-radius:4px;
+  padding:12px 16px;font-weight:700;font-size:.9rem;margin-bottom:16px}
+.nav-row{display:flex;gap:10px;justify-content:space-between;align-items:center;margin:18px 2px 0;flex-wrap:wrap}
+
+/* audio */
+.player{background:var(--night);color:var(--parch);border:3px solid var(--line);border-radius:5px;
+  padding:14px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;box-shadow:var(--sh-sm)}
+.disc{width:46px;height:46px;flex:none;border-radius:50%;border:3px solid var(--parch);position:relative;
+  background:repeating-conic-gradient(from 0deg,var(--night2) 0 18deg,#3B4482 18deg 36deg)}
+.disc::after{content:"";position:absolute;inset:36%;border-radius:50%;background:var(--gold);border:2px solid var(--parch)}
+.disc.spin{animation:spin 2s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.player .ttl{font-family:var(--display);font-weight:800;font-size:.98rem}
+.player .ttl small{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;opacity:.7;text-transform:uppercase}
+.player .ctrls{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.speed{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.68rem}
+.speed input{width:84px}
+.transcript{margin-top:12px;background:#fff;color:var(--night);border:3px solid var(--line);border-radius:4px;
+  padding:14px 16px;font-size:.93rem;line-height:1.7;display:none;max-height:340px;overflow:auto}
+.transcript.on{display:block}
+.transcript b{color:var(--violet)}
+.speaking{background:var(--gold);border-radius:3px}
+
+/* poster */
+.poster-box{display:grid;grid-template-columns:300px 1fr;gap:20px;align-items:start}
+.poster{border:4px solid var(--line);box-shadow:var(--sh);border-radius:3px;overflow:hidden;background:#0A0E24}
+.poster svg{display:block;width:100%;height:auto}
+.chipset{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chip{border:3px solid var(--line);background:#fff;color:var(--night);border-radius:999px;padding:7px 14px;
+  font-weight:700;font-size:.88rem;box-shadow:2px 2px 0 var(--line)}
+.chip.on{background:var(--teal);color:#04140F}
+
+/* interview questions */
+.q{border-bottom:2px dashed rgba(11,16,38,.22);padding:16px 0}
+.q:last-child{border-bottom:none}
+.q h4{font-size:1.02rem;margin-bottom:10px;display:flex;gap:10px;align-items:flex-start}
+.q h4 i{font-family:var(--mono);font-style:normal;background:var(--night);color:var(--parch);
+  width:26px;height:26px;display:grid;place-items:center;flex:none;font-size:.76rem;border-radius:3px}
+.opt{display:block;width:100%;text-align:left;border:3px solid var(--line);background:#fff;color:var(--night);
+  border-radius:4px;padding:10px 13px;margin-bottom:8px;font-weight:700;font-size:.94rem;box-shadow:2px 2px 0 var(--line)}
+.opt.chosen{background:var(--violet);color:#fff}
+.opt.ok{background:var(--teal);color:#04140F}
+.opt.no{background:var(--ember);color:#fff}
+.tips{background:var(--night);color:var(--parch);border:3px solid var(--line);border-radius:5px;padding:18px 20px}
+.tips h3{color:var(--gold);font-size:1.1rem;margin-bottom:10px}
+.tips ol{margin-left:18px;line-height:1.75;font-size:.94rem}
+.tip{margin-top:12px;background:var(--parch2);border-left:8px solid var(--gold);border-radius:3px;
+  padding:10px 14px;font-weight:700;font-size:.9rem;display:none;color:var(--night)}
+.tip.on{display:block}
+
+/* wall + speaking */
+.wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:14px}
+.sticky{border:3px solid var(--line);border-radius:4px;padding:12px;font-weight:700;font-size:.9rem;
+  box-shadow:var(--sh-sm);color:var(--night);transform:rotate(-.9deg)}
+.sticky:nth-child(2n){transform:rotate(1.1deg)}
+.sticky small{display:block;font-family:var(--mono);font-size:.64rem;opacity:.7;margin-top:6px}
+.frame-box{background:var(--night);color:var(--parch);border-radius:5px;padding:16px 18px;margin-top:14px}
+.frame-box h4{color:var(--gold);font-size:.98rem;margin-bottom:8px}
+.frame-box p{font-size:.92rem;line-height:1.9}
+.frame-box code{font-family:var(--mono);background:rgba(255,255,255,.12);padding:2px 6px;border-radius:3px}
+.timer{font-family:var(--display);font-weight:900;font-size:2.6rem;text-align:center;color:var(--night)}
+.timer.low{color:var(--ember)}
+
+/* quiz show */
+.quizcard{background:var(--night);color:var(--parch);border:4px solid var(--gold);border-radius:6px;
+  padding:30px 24px;text-align:center;box-shadow:var(--sh)}
+.quizcard .qn{font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;opacity:.7}
+.quizcard h3{font-size:clamp(1.2rem,3.4vw,1.8rem);margin:14px 0}
+.quizcard .ans{font-family:var(--display);font-weight:900;color:var(--gold);font-size:1.3rem;
+  margin-top:16px;display:none}
+.quizcard .ans.on{display:block;animation:fadein .3s}
+.teams{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:16px}
+.team{border:3px solid var(--line);background:#fff;color:var(--night);border-radius:4px;padding:10px;text-align:center}
+.team b{display:block;font-family:var(--display);font-size:1.6rem}
+.team button{border:2px solid var(--line);background:var(--gold);border-radius:3px;padding:3px 10px;
+  font-weight:700;font-size:.8rem;margin-top:6px}
+.qlist{margin-top:14px;font-size:.9rem;line-height:1.7}
+.qlist li{margin-bottom:6px}
+
+/* results */
+.scorebig{font-family:var(--display);font-weight:900;font-size:3.4rem;text-align:center}
+.bar{height:20px;border:3px solid var(--line);border-radius:3px;background:#fff;overflow:hidden;margin:6px 0 14px}
+.bar i{display:block;height:100%;background:var(--teal);width:0;transition:width .9s ease}
+.medal{width:130px;height:130px;margin:0 auto;border-radius:50%;border:5px solid var(--line);
+  background:radial-gradient(circle at 34% 28%,#fff,var(--gold) 62%);display:grid;place-items:center;
+  text-align:center;font-family:var(--display);font-weight:900;color:var(--night);line-height:1.15;padding:10px;box-shadow:var(--sh)}
+
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,150%);z-index:90;background:var(--gold);
+  color:var(--night);border:3px solid var(--line);border-radius:4px;padding:11px 20px;font-family:var(--display);
+  font-weight:800;transition:transform .35s cubic-bezier(.2,1.4,.4,1);max-width:90vw;text-align:center}
+#toast.on{transform:translate(-50%,0)}
+.fx{position:fixed;inset:0;pointer-events:none;z-index:80;overflow:hidden}
+.fxs{position:absolute;font-size:22px;animation:fall 1.6s ease-in forwards}
+@keyframes fall{0%{transform:translateY(-10vh) rotate(0);opacity:1}100%{transform:translateY(105vh) rotate(420deg);opacity:0}}
+
+@media (max-width:780px){
+  .ticket{grid-template-columns:1fr}
+  .ticket-hero::after{display:none}
+  .poster-box{grid-template-columns:1fr}
+  .who b{max-width:44vw}
+  .card{padding:18px 16px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{
+  body{background:#fff;color:#000}
+  header.top,.nav-row,.player,#toast,.reel{display:none!important}
+  .card{box-shadow:none;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== LOGIN ===================== -->
+<section id="login">
+  <div class="ticket">
+    <div class="ticket-hero">
+      <div class="moon"></div>
+      <div class="stub">ADMIT ONE · FORM 4 · ENGLISH · MODULE: PEOPLE AND CULTURE</div>
+      <h1>The Fan<em>Club</em></h1>
+      <p>A radio interview, a poster, and one trivia quiz you write yourselves. Listen closely — the details are said only once.</p>
+      <div class="stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p style="margin-top:26px;font-size:.8rem;opacity:.8">SMK RPS Betau K11 · 4 Jupiter</p>
+    </div>
+    <div class="login-form">
+      <h2>Sign in with DELIMa</h2>
+      <div class="sub">Use the Google email your school gave you.</div>
+      <div class="row">
+        <label class="lbl" for="in-email">DELIMa ID (Google email)</label>
+        <input class="field" id="in-email" type="email" inputmode="email" autocomplete="email" placeholder="nurul.aina@moe-dl.edu.my">
+      </div>
+      <div class="row">
+        <label class="lbl" for="in-name">Your name</label>
+        <input class="field" id="in-name" type="text" autocomplete="name" placeholder="Nurul Aina binti Zainal">
+      </div>
+      <div class="row">
+        <label class="lbl" for="in-class">Class</label>
+        <select class="field" id="in-class">
+          <option>4 JUPITER</option><option>4 MARS</option><option>2 VENUS</option><option>Other</option>
+        </select>
+      </div>
+      <button class="btn teal" id="go-login" style="width:100%">Take your seat</button>
+      <div class="err" id="login-err"></div>
+      <p class="note">Your answers stay on this device only. Nothing is sent anywhere, and nothing is saved after you close the page.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== APP ===================== -->
+<div id="app" hidden>
+<header class="top">
+  <div class="wrap">
+    <div class="badge-strip">
+      <div class="avatar" id="av">?</div>
+      <div class="who"><b id="who-name">—</b><span id="who-id">—</span></div>
+      <div class="fp"><div class="amt" id="amt">0 FP</div><small>Fan points</small></div>
+    </div>
+    <nav class="reel" id="reel" aria-label="Lesson scenes"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 1 WARM UP -->
+  <section class="stage" data-s="1">
+    <div class="stage-head">
+      <span class="kicker">Warm-up · Scene 1</span>
+      <h2>Who are you a big fan of?</h2>
+      <p>A film character, an actor, a singer, a band, a footballer — anyone. Then tell us how you find out news about them.</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Talk first, then type</div>
+      <div class="row" style="margin-top:12px">
+        <label class="lbl" for="fanof">I'm a big fan of…</label>
+        <input class="field" id="fanof" placeholder="e.g. Zendaya / Man United / Faizal Tahir">
+      </div>
+      <label class="lbl">How do you get information about them? Tap all that you use.</label>
+      <div class="chipset" id="sources"></div>
+      <div class="row">
+        <label class="lbl" for="how">Which one do you trust most, and why?</label>
+        <input class="field" id="how" placeholder="I trust… because…">
+      </div>
+      <button class="btn" id="post-wall">Add me to the board</button>
+      <div class="wall" id="wall"></div>
+    </div>
+    <div class="nav-row"><span></span><button class="btn violet next">Next scene →</button></div>
+  </section>
+
+  <!-- 2 POSTER -->
+  <section class="stage" data-s="2">
+    <div class="stage-head">
+      <span class="kicker">Scene 2</span>
+      <h2>Read the poster</h2>
+      <p>Look carefully. What can you see, and what kind of film is it advertising? Your teacher has the textbook poster too.</p>
+    </div>
+    <div class="card">
+      <div class="poster-box">
+        <div class="poster" id="poster"></div>
+        <div>
+          <div class="eyebrow">Step 1 · what can you see?</div>
+          <div class="chipset" id="seen"></div>
+          <div class="row">
+            <label class="lbl" for="p-kind">Step 2 · What kind of film is this poster advertising? How do you know?</label>
+            <textarea class="field" id="p-kind" rows="3" placeholder="It is advertising a … film. I know because …"></textarea>
+          </div>
+          <button class="btn teal" id="p-check">Share my answer</button>
+          <div class="tip" id="p-tip">A poster like this advertises a <b>fantasy adventure</b> film: the castle, the owl, the wand and the night sky are all clues. The poster in your textbook advertises a Harry Potter film — the same clues are there.</div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-row"><button class="btn ghost prev">← Back</button><button class="btn violet next">Next scene →</button></div>
+  </section>
+
+  <!-- 3 SPEAKING -->
+  <section class="stage" data-s="3">
+    <div class="stage-head">
+      <span class="kicker">Learning objective 2 · Scene 3</span>
+      <h2>Tell your partner about a film</h2>
+      <p>Choose a favourite fantasy or adventure film. Describe the plot and the characters, and explain why you like it.</p>
+    </div>
+    <div class="objective">🎯 Discuss at least one question about film and adventure with your talk partner.</div>
+    <div class="card">
+      <div class="eyebrow">Your notes · keep them short, you are speaking, not reading</div>
+      <div class="row" style="margin-top:12px">
+        <label class="lbl" for="f-title">The film</label>
+        <input class="field" id="f-title" placeholder="Title">
+      </div>
+      <div class="row">
+        <label class="lbl" for="f-plot">The plot in three sentences</label>
+        <textarea class="field" id="f-plot" rows="3" placeholder="It is about… First… In the end…"></textarea>
+      </div>
+      <div class="row">
+        <label class="lbl" for="f-char">The characters (and which one you would be)</label>
+        <input class="field" id="f-char" placeholder="The main characters are… I would be… because…">
+      </div>
+      <div class="row">
+        <label class="lbl" for="f-why">Why you like it</label>
+        <input class="field" id="f-why" placeholder="I like it because…">
+      </div>
+      <div class="frame-box">
+        <h4>Useful language</h4>
+        <p><code>It's set in…</code> <code>The story begins when…</code> <code>What I love about it is…</code> <code>It reminds me of…</code> <code>You should watch it because…</code><br>
+        <b>Ask your partner:</b> <code>Why is that your favourite?</code> <code>Which part is the best?</code> <code>Would you watch it again?</code></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Speak for 90 seconds · your partner listens and asks one question</div>
+      <div class="timer" id="clock" style="margin:14px 0">1:30</div>
+      <div class="nav-row" style="margin-top:0">
+        <button class="btn teal" id="start-timer">Start speaking</button>
+        <button class="btn sm ghost" id="reset-timer">Reset</button>
+      </div>
+      <div class="row" style="margin-top:18px">
+        <label class="lbl" for="pq">The question my partner asked me:</label>
+        <input class="field" id="pq" placeholder="Write it here, then answer it out loud.">
+      </div>
+      <button class="btn" id="share-film">Share with the class</button>
+    </div>
+    <div class="nav-row"><button class="btn ghost prev">← Back</button><button class="btn violet next">Next scene →</button></div>
+  </section>
+
+  <!-- 4 BEFORE LISTENING -->
+  <section class="stage" data-s="4">
+    <div class="stage-head">
+      <span class="kicker">Scene 4</span>
+      <h2>Before you listen</h2>
+      <p>Read the five questions and all the options first. Then read the tips — they decide whether you get five out of five.</p>
+    </div>
+    <div class="card">
+      <div class="tips">
+        <h3>TIPS · how to answer listening questions</h3>
+        <ol id="tips"></ol>
+      </div>
+      <div class="row" style="margin-top:16px">
+        <label class="lbl" for="keyw">Which question word is in question 3? Write the key word you will listen for.</label>
+        <input class="field" id="keyw" placeholder="e.g. why…">
+      </div>
+      <button class="btn teal" id="ready">I've read the questions — I'm ready</button>
+    </div>
+    <div class="card">
+      <div class="eyebrow">The five questions · read them now, answer them at scene 5</div>
+      <div id="preview" style="margin-top:10px;font-size:.95rem;line-height:1.9"></div>
+    </div>
+    <div class="nav-row"><button class="btn ghost prev">← Back</button><button class="btn violet next">Next scene →</button></div>
+  </section>
+
+  <!-- 5 LISTENING -->
+  <section class="stage" data-s="5">
+    <div class="stage-head">
+      <span class="kicker">Learning objective 1 · Scene 5</span>
+      <h2>The interview</h2>
+      <p>You will hear it twice. First listening: answer what you can. Second listening: check the ones you are not sure about.</p>
+    </div>
+    <div class="objective">🎯 Listen to a part of an interview and answer five questions based on the interview.</div>
+    <div class="card">
+      <div class="player">
+        <div class="disc" id="d5"></div>
+        <div class="ttl">Weekend Culture · radio interview<small>Plays used: <span id="plays">0</span> of 2</small></div>
+        <div class="ctrls">
+          <button class="btn sm teal" data-play="interview">▶ Play</button>
+          <button class="btn sm ghost" data-stop>■ Stop</button>
+          <div class="speed"><label for="rate">SPEED</label><input id="rate" class="rate" type="range" min="0.6" max="1.2" step="0.1" value="0.9"></div>
+        </div>
+      </div>
+      <div id="five" style="margin-top:16px"></div>
+      <div class="nav-row">
+        <span style="font-weight:700" id="fivescore"></span>
+        <button class="btn teal" id="check-five">Check my answers</button>
+      </div>
+    </div>
+    <div class="nav-row"><button class="btn ghost prev">← Back</button><button class="btn violet next">Next scene →</button></div>
+  </section>
+
+  <!-- 6 CHECK -->
+  <section class="stage" data-s="6">
+    <div class="stage-head">
+      <span class="kicker">Scene 6</span>
+      <h2>Check the answers together</h2>
+      <p>Play it once more if anything is still unclear. Open the script only after your teacher says so.</p>
+    </div>
+    <div class="card">
+      <div class="player">
+        <div class="disc" id="d6"></div>
+        <div class="ttl">Weekend Culture · one more time<small>Follow the script while you listen</small></div>
+        <div class="ctrls">
+          <button class="btn sm teal" data-play="interview">▶ Play again</button>
+          <button class="btn sm ghost" data-stop>■ Stop</button>
+          <button class="btn sm ghost" data-transcript="tr-int">Show script</button>
+        </div>
+      </div>
+      <div class="transcript" id="tr-int"></div>
+      <div id="answerkey" style="margin-top:16px"></div>
+    </div>
+    <div class="nav-row"><button class="btn ghost prev">← Back</button><button class="btn violet next">Next scene →</button></div>
+  </section>
+
+  <!-- 7 FACT HUNT -->
+  <section class="stage" data-s="7">
+    <div class="stage-head">
+      <span class="kicker">Scene 7</span>
+      <h2>Find a fact. Turn it into a question.</h2>
+      <p>Work with your talk partner. Find one fact about the films or books that other people probably don't know — characters, plots, places, actors. Then write it as a quiz question.</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Step 1 · the fact</div>
+      <div class="row" style="margin-top:10px">
+        <input class="field" id="fact" placeholder="Our unusual fact is…">
+      </div>
+      <div class="eyebrow">Step 2 · turn it into a question, then write the answer</div>
+      <div class="row" style="margin-top:10px">
+        <input class="field" id="qtext" placeholder="Question — e.g. What is the name of the twins' joke shop?">
+      </div>
+      <div class="row">
+        <input class="field" id="qans" placeholder="Answer">
+      </div>
+      <button class="btn" id="add-q">Add to the class quiz</button>
+      <p style="margin-top:14px;font-weight:700;font-size:.9rem;opacity:.75">Questions in the quiz so far: <span id="qcount">2</span></p>
+      <ol class="qlist" id="qlist"></ol>
+    </div>
+    <div class="nav-row"><button class="btn ghost prev">← Back</button><button class="btn violet next">Start the quiz →</button></div>
+  </section>
+
+  <!-- 8 QUIZ SHOW -->
+  <section class="stage" data-s="8">
+    <div class="stage-head">
+      <span class="kicker">Scene 8</span>
+      <h2>Trivia quiz</h2>
+      <p>Teacher reads the question, teams answer, then reveal. Tap +1 for the team that gets it right.</p>
+    </div>
+    <div class="quizcard">
+      <div class="qn" id="qn">QUESTION 1 OF 2</div>
+      <h3 id="qbody">—</h3>
+      <button class="btn gold" id="reveal">Reveal answer</button>
+      <div class="ans" id="qans-out">—</div>
+      <div class="nav-row" style="justify-content:center;gap:14px">
+        <button class="btn sm ghost" id="qprev">← Previous</button>
+        <button class="btn sm ghost" id="qnext">Next →</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Scoreboard</div>
+      <div class="teams" id="teams"></div>
+    </div>
+    <div class="nav-row"><button class="btn ghost prev">← Back</button><button class="btn violet next">See my results →</button></div>
+  </section>
+
+  <!-- 9 REFLECTION -->
+  <section class="stage" data-s="9">
+    <div class="stage-head">
+      <span class="kicker">Reflection · Scene 9</span>
+      <h2>How did you do?</h2>
+    </div>
+    <div class="card">
+      <div class="medal" id="medal">…</div>
+      <div class="scorebig" id="finalamt" style="margin-top:14px">0 FP</div>
+      <p style="text-align:center;font-weight:700;opacity:.7;margin-bottom:20px">fan points earned</p>
+      <div class="eyebrow">Objective 1 · answer five questions on the interview</div>
+      <div class="bar"><i id="b1"></i></div>
+      <div class="eyebrow">Objective 2 · discuss a question about film and adventure</div>
+      <div class="bar"><i id="b2"></i></div>
+      <div class="row" style="margin-top:8px">
+        <label class="lbl" for="refl">Finish these sentences:</label>
+        <textarea class="field" id="refl" rows="4" placeholder="The listening was easy/difficult because…
+One thing I will do differently next time is…
+A film I want to watch after today is…"></textarea>
+      </div>
+      <div class="nav-row">
+        <button class="btn ghost prev">← Back</button>
+        <button class="btn teal" onclick="window.print()">Print / save my page</button>
+      </div>
+    </div>
+  </section>
+</main>
+</div>
+
+<div id="toast"></div>
+<div class="fx" id="fx"></div>
+
+<script>
+/* ============================================================
+   THE FAN CLUB — Form 4 English, People and Culture
+   Listening 1.1.2 + Speaking 2.1.1
+   ============================================================ */
+
+const S={student:{name:'',email:'',cls:''},fp:0,stage:1,done:new Set(),rate:0.9,
+         fiveScore:0,spoke:0,plays:0};
+
+/* ---------- content ---------- */
+const SOURCES=['Instagram / TikTok','YouTube','Fan websites','Friends at school','Podcasts','Newspapers & magazines','X / Threads','The films themselves'];
+const SEEN=['a castle','an owl','a wand','a full moon','a forest','stars','a letter','a title','a release date'];
+
+const INTERVIEW=[
+ {v:0,t:"Good afternoon, and welcome back to Weekend Culture. Today I'm speaking to Nadia Rashid, a student from Kuala Lipis who runs a fantasy film and book club at her school. Welcome, Nadia."},
+ {v:1,t:"Thank you for inviting me."},
+ {v:0,t:"So, how did the club start?"},
+ {v:1,t:"Two years ago. My friend and I finished reading a long fantasy series and we wanted to talk about it with somebody. We put a notice on the school board, and six people came to the first meeting."},
+ {v:0,t:"And how many members do you have now?"},
+ {v:1,t:"Thirty-four. We were surprised too. Most of them joined after we showed the first film of the series in the school hall."},
+ {v:0,t:"When do you meet?"},
+ {v:1,t:"Every Thursday after school, from four o'clock until half past five. We used to meet on Friday, but too many members had football practice."},
+ {v:0,t:"What do you do in the meetings?"},
+ {v:1,t:"Sometimes we watch a film and compare it with the book. Sometimes we argue about which character makes the worst decisions. Last month we drew a map of an imaginary school."},
+ {v:0,t:"A lot of people love these films for the special effects. Is that what you like most?"},
+ {v:1,t:"Honestly, no. The effects are beautiful, but I stay for the friendships. When the main characters protect each other, that feels real to me. You can build a castle with a computer, but you cannot build that."},
+ {v:0,t:"How do you keep up with news about new films?"},
+ {v:1,t:"I follow two fan websites and one podcast. My mother thinks I read too much of it."},
+ {v:0,t:"And what is next for the club?"},
+ {v:1,t:"Next month we are holding a quiz night. Every team pays five ringgit to enter, and all the money goes to the school library. We want to buy more fantasy books, because at the moment there are only two shelves."},
+ {v:0,t:"That sounds wonderful. Thank you, Nadia."},
+ {v:1,t:"Thank you."}
+];
+
+const FIVE=[
+ {q:"How long has the club existed?",
+  o:["For two years.","For six months.","For five years."],k:0,
+  why:"She says the club started two years ago, when she and a friend finished a fantasy series."},
+ {q:"How many members does the club have now?",
+  o:["Six.","Thirty-four.","Forty-three."],k:1,
+  why:"Six people came to the FIRST meeting — that number is there to test you. There are thirty-four members now."},
+ {q:"Why did the club change its meeting day?",
+  o:["The school hall was busy.","A teacher asked them to change.","Many members had football practice."],k:2,
+  why:"They used to meet on Friday, but too many members had football practice, so now they meet on Thursday."},
+ {q:"What does Nadia like most about the films?",
+  o:["The special effects.","The friendship between the characters.","The music."],k:1,
+  why:"She says the effects are beautiful, but she stays for the friendships. Listen for the word 'but'."},
+ {q:"What will the money from the quiz night be used for?",
+  o:["Buying books for the school library.","Paying for a school trip.","Making a short film."],k:0,
+  why:"Every team pays five ringgit and all the money goes to the library, to buy more fantasy books."}
+];
+
+const TIPS=[
+ "Read all five questions and every option <b>before</b> the recording starts.",
+ "Underline the key word in the question: <b>how long, how many, why, what</b>. That word tells you what to listen for.",
+ "Numbers and days are said quickly. Write them down the first time you hear them.",
+ "The speaker often says a number or word from the wrong option too. Wait for the <b>whole</b> sentence before you decide.",
+ "Listen for <b>but</b>, <b>actually</b> and <b>honestly</b> — the real answer usually comes straight after them.",
+ "On the second listening, check only the answers you were unsure about."
+];
+
+const QUIZ=[
+ {q:"What is the name of Fred and Ron Weasley's joke shop?",a:"Weasleys' Wizard Wheezes",by:'Teacher example'},
+ {q:"How do Hogwarts students receive their letters?",a:"They are delivered by owls",by:'Teacher example'}
+];
+
+/* ---------- poster (original artwork) ---------- */
+const POSTER=`<svg viewBox="0 0 300 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Original film poster illustration: a castle at night with an owl carrying a letter">
+<defs>
+ <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#1B1250"/><stop offset="55%" stop-color="#2B2270"/><stop offset="100%" stop-color="#0A0E24"/>
+ </linearGradient>
+ <radialGradient id="glow"><stop offset="0" stop-color="#FFF3CF"/><stop offset="100%" stop-color="#E7B24C" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="300" height="440" fill="url(#sky)"/>
+<circle cx="214" cy="86" r="70" fill="url(#glow)" opacity=".7"/>
+<circle cx="214" cy="86" r="27" fill="#F7EEDA"/>
+<circle cx="205" cy="79" r="5" fill="#E6DBC0" opacity=".8"/><circle cx="220" cy="95" r="3.4" fill="#E6DBC0" opacity=".7"/>
+<g fill="#FFF">
+ <circle cx="34" cy="42" r="1.6"/><circle cx="72" cy="24" r="1.1"/><circle cx="112" cy="58" r="1.5"/>
+ <circle cx="58" cy="96" r="1.2"/><circle cx="152" cy="34" r="1.3"/><circle cx="264" cy="150" r="1.4"/>
+ <circle cx="24" cy="150" r="1.2"/><circle cx="278" cy="52" r="1.6"/><circle cx="96" cy="128" r="1"/>
+</g>
+<path d="M0 300 L44 268 L96 296 L150 252 L206 292 L256 262 L300 296 L300 440 L0 440Z" fill="#0A0E24"/>
+<g fill="#12183A">
+ <rect x="96" y="196" width="108" height="106"/>
+ <rect x="80" y="222" width="20" height="80"/><rect x="200" y="222" width="20" height="80"/>
+ <rect x="138" y="168" width="26" height="134"/>
+ <polygon points="93,196 150,150 207,196"/>
+ <polygon points="77,222 90,198 103,222"/><polygon points="197,222 210,198 223,222"/>
+ <polygon points="135,168 151,140 167,168"/>
+</g>
+<g fill="#E7B24C">
+ <rect x="110" y="214" width="9" height="13" rx="4"/><rect x="132" y="240" width="9" height="13" rx="4"/>
+ <rect x="164" y="216" width="9" height="13" rx="4"/><rect x="180" y="252" width="9" height="13" rx="4"/>
+ <rect x="84" y="244" width="8" height="12" rx="4"/><rect x="204" y="240" width="8" height="12" rx="4"/>
+ <rect x="146" y="192" width="9" height="14" rx="4"/>
+</g>
+<g transform="translate(60,120) rotate(-8)">
+ <ellipse cx="0" cy="0" rx="16" ry="20" fill="#C8B08A"/>
+ <path d="M-15 -6 Q-40 -16 -46 4 Q-28 6 -14 6Z" fill="#A98F68"/>
+ <path d="M15 -6 Q40 -16 46 4 Q28 6 14 6Z" fill="#A98F68"/>
+ <circle cx="-6" cy="-6" r="5" fill="#F7EEDA"/><circle cx="6" cy="-6" r="5" fill="#F7EEDA"/>
+ <circle cx="-6" cy="-6" r="2.2" fill="#0B1026"/><circle cx="6" cy="-6" r="2.2" fill="#0B1026"/>
+ <polygon points="0,-1 -3.4,-4 3.4,-4" fill="#E7B24C"/>
+ <rect x="-11" y="16" width="22" height="14" fill="#F7EEDA" stroke="#0B1026" stroke-width="1.4"/>
+ <path d="M-11 16 L0 24 L11 16" fill="none" stroke="#0B1026" stroke-width="1.4"/>
+ <circle cx="0" cy="24.5" r="3" fill="#D2503F"/>
+</g>
+<g stroke="#F7EEDA" stroke-width="3" stroke-linecap="round">
+ <line x1="238" y1="330" x2="284" y2="286"/>
+</g>
+<g fill="#E7B24C">
+ <path d="M286 278 l3 7 7 3 -7 3 -3 7 -3-7 -7-3 7-3z"/>
+ <path d="M270 300 l2 4.6 4.6 2 -4.6 2 -2 4.6 -2-4.6 -4.6-2 4.6-2z"/>
+ <path d="M258 268 l1.6 3.6 3.6 1.6 -3.6 1.6 -1.6 3.6 -1.6-3.6 -3.6-1.6 3.6-1.6z"/>
+</g>
+<text x="150" y="356" text-anchor="middle" font-family="Cinzel,Georgia,serif" font-weight="900" font-size="30" fill="#F7EEDA" letter-spacing="1">THE</text>
+<text x="150" y="390" text-anchor="middle" font-family="Cinzel,Georgia,serif" font-weight="900" font-size="27" fill="#E7B24C" letter-spacing="1">ENCHANTED</text>
+<text x="150" y="414" text-anchor="middle" font-family="Cinzel,Georgia,serif" font-weight="900" font-size="27" fill="#E7B24C" letter-spacing="1">SCHOOL</text>
+<text x="150" y="432" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8.5" fill="#C8B08A" letter-spacing="3">IN CINEMAS THIS DECEMBER</text>
+</svg>`;
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('on'),2600);}
+function rain(n){const fx=$('#fx');for(let i=0;i<n;i++){const c=document.createElement('div');c.className='fxs';
+  c.textContent=['★','✦','🎬','🎟️'][i%4];c.style.left=(Math.random()*96)+'%';c.style.animationDelay=(Math.random()*.5)+'s';
+  fx.appendChild(c);setTimeout(()=>c.remove(),2400);}}
+function award(n,m){S.fp+=n;const a=$('#amt');a.textContent=S.fp+' FP';
+  a.classList.remove('pop');void a.offsetWidth;a.classList.add('pop');rain(Math.min(14,n));if(m)toast(m+'  +'+n+' FP');}
+function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+
+/* ---------- login ---------- */
+$('#go-login').addEventListener('click',()=>{
+  const email=$('#in-email').value.trim().toLowerCase(),name=$('#in-name').value.trim(),err=$('#login-err');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){err.textContent='That doesn’t look like an email address. Type your full DELIMa ID, ending in @moe-dl.edu.my.';err.style.display='block';return;}
+  if(name.length<2){err.textContent='Type your name so your teacher knows whose work this is.';err.style.display='block';return;}
+  err.style.display='none';
+  S.student={name,email,cls:$('#in-class').value};
+  $('#login').style.display='none';$('#app').hidden=false;
+  $('#who-name').textContent=name;$('#who-id').textContent=email+' · '+S.student.cls;
+  $('#av').textContent=name.trim()[0].toUpperCase();
+  toast(email.endsWith('moe-dl.edu.my')?('Welcome, '+name.split(' ')[0]+'!'):'Signed in. Check your DELIMa ID with your teacher — it usually ends in @moe-dl.edu.my');
+  buildAll();go(1);
+});
+$('#in-email').addEventListener('keydown',e=>{if(e.key==='Enter')$('#in-name').focus()});
+$('#in-name').addEventListener('keydown',e=>{if(e.key==='Enter')$('#go-login').click()});
+
+/* ---------- navigation ---------- */
+const LAST=9;
+function buildReel(){const r=$('#reel');r.innerHTML='';
+  for(let i=1;i<=LAST;i++){const b=document.createElement('button');b.className='frame';
+    b.innerHTML='<span>'+i+'</span>';b.setAttribute('aria-label','Scene '+i);b.onclick=()=>go(i);r.appendChild(b);}}
+function go(n){S.stage=n;
+  $$('.stage').forEach(el=>el.classList.toggle('on',+el.dataset.s===n));
+  $$('#reel .frame').forEach((b,i)=>{b.classList.toggle('active',i+1===n);b.classList.toggle('done',S.done.has(i+1));});
+  stopAudio();
+  if(n===8)renderQuiz();
+  if(n===LAST)showResults();
+  window.scrollTo({top:0,behavior:'smooth'});}
+function complete(n){S.done.add(n);const b=$$('#reel .frame')[n-1];if(b)b.classList.add('done');}
+document.addEventListener('click',e=>{
+  if(e.target.classList.contains('next')){complete(S.stage);go(Math.min(LAST,S.stage+1));}
+  if(e.target.classList.contains('prev'))go(Math.max(1,S.stage-1));
+});
+document.addEventListener('input',e=>{if(e.target.classList.contains('rate')){S.rate=parseFloat(e.target.value);
+  $$('.rate').forEach(r=>{if(r!==e.target)r.value=e.target.value;});}});
+
+/* ---------- audio ---------- */
+let voices=[];
+function loadVoices(){voices=speechSynthesis.getVoices();}
+loadVoices();speechSynthesis.onvoiceschanged=loadVoices;
+function pickVoice(){return voices.find(v=>/en-GB/i.test(v.lang))||voices.find(v=>/^en/i.test(v.lang))||voices[0];}
+function stopAudio(){speechSynthesis.cancel();$$('.disc').forEach(d=>d.classList.remove('spin'));
+  $$('.transcript p').forEach(p=>p.classList.remove('speaking'));}
+function speak(lines,disc,transSel){
+  stopAudio();if(disc)disc.classList.add('spin');
+  lines.forEach((ln,i)=>{
+    const u=new SpeechSynthesisUtterance(typeof ln==='string'?ln:ln.t);
+    const v=pickVoice();if(v)u.voice=v;
+    u.lang='en-GB';u.rate=S.rate;u.pitch=(typeof ln==='object'&&ln.v===1)?1.22:0.94;
+    u.onstart=()=>{if(transSel){const p=$(transSel+' [data-l="'+i+'"]');if(p){p.classList.add('speaking');p.scrollIntoView({block:'nearest'});}}};
+    u.onend=()=>{if(transSel){const p=$(transSel+' [data-l="'+i+'"]');if(p)p.classList.remove('speaking');}
+                 if(i===lines.length-1&&disc)disc.classList.remove('spin');};
+    speechSynthesis.speak(u);
+  });
+  if(!('speechSynthesis' in window))toast('This browser cannot play the audio. Use the script instead.');
+}
+document.addEventListener('click',e=>{
+  const p=e.target.closest('[data-play]');
+  if(p){
+    const disc=p.closest('.player')?.querySelector('.disc');
+    speak(INTERVIEW,disc,S.stage===6?'#tr-int':null);
+    if(S.stage===5){S.plays++;$('#plays').textContent=S.plays;
+      if(S.plays===2)toast('Second listening — check only the answers you were unsure about.');}
+  }
+  if(e.target.closest('[data-stop]'))stopAudio();
+  const tb=e.target.closest('[data-transcript]');
+  if(tb){const el=$('#'+tb.dataset.transcript);el.classList.toggle('on');
+    tb.textContent=el.classList.contains('on')?'Hide script':'Show script';}
+});
+
+/* ---------- scene 1: fan board ---------- */
+const BOARD=[{w:'I follow my favourite band on TikTok, but I check the news on their official site.',by:'Class example'}];
+const picked=new Set();
+function buildSources(){
+  const box=$('#sources');box.innerHTML='';
+  SOURCES.forEach(s=>{const b=document.createElement('button');b.className='chip';b.textContent=s;
+    b.onclick=()=>{b.classList.toggle('on');picked.has(s)?picked.delete(s):picked.add(s);};box.appendChild(b);});
+}
+function buildBoard(){
+  const wall=$('#wall');wall.innerHTML='';
+  const cols=['var(--gold)','var(--teal)','var(--parch2)','var(--violet)'];
+  BOARD.forEach((n,i)=>{const d=document.createElement('div');d.className='sticky';
+    d.style.background=cols[i%cols.length];if(cols[i%cols.length]==='var(--violet)')d.style.color='#fff';
+    d.innerHTML=esc(n.w)+'<small>'+esc(n.by)+'</small>';wall.appendChild(d);});
+}
+$('#post-wall').addEventListener('click',()=>{
+  const fan=$('#fanof').value.trim(),how=$('#how').value.trim();
+  if(!fan){toast('Write who you are a fan of first.');return;}
+  BOARD.push({w:'I\u2019m a big fan of '+fan+'. I use '+([...picked].join(', ')||'—')+'. '+how,by:S.student.name});
+  buildBoard();award(5,'Added to the board.');complete(1);$('#post-wall').disabled=true;
+});
+
+/* ---------- scene 2: poster ---------- */
+function buildPoster(){
+  $('#poster').innerHTML=POSTER;
+  const box=$('#seen');box.innerHTML='';
+  SEEN.forEach(s=>{const b=document.createElement('button');b.className='chip';b.textContent=s;
+    b.onclick=()=>b.classList.toggle('on');box.appendChild(b);});
+}
+$('#p-check').addEventListener('click',()=>{
+  const n=$$('#seen .chip.on').length,txt=$('#p-kind').value.trim();
+  if(n<2||txt.length<10){toast('Tap at least two things you can see, and write one full sentence.');return;}
+  $('#p-tip').classList.add('on');award(6,'Good reading of the poster.');complete(2);
+});
+
+/* ---------- scene 3: speaking ---------- */
+let tLeft=90,tId=null;
+function paint(){const m=Math.floor(tLeft/60),s=String(tLeft%60).padStart(2,'0');
+  const c=$('#clock');c.textContent=m+':'+s;c.classList.toggle('low',tLeft<=15);}
+$('#start-timer').addEventListener('click',()=>{
+  if(tId)return;
+  tId=setInterval(()=>{tLeft--;paint();
+    if(tLeft<=0){clearInterval(tId);tId=null;toast('Time! Now your partner asks you one question.');
+      S.spoke=Math.max(S.spoke,1);award(8,'You spoke for 90 seconds.');}},1000);
+});
+$('#reset-timer').addEventListener('click',()=>{clearInterval(tId);tId=null;tLeft=90;paint();});
+$('#share-film').addEventListener('click',()=>{
+  const t=$('#f-title').value.trim(),w=$('#f-why').value.trim(),q=$('#pq').value.trim();
+  if(!t||!w){toast('Write the title and why you like it before you share.');return;}
+  BOARD.push({w:'My film: '+t+'. '+w+(q?' My partner asked: '+q:''),by:S.student.name});
+  buildBoard();S.spoke=2;award(10,'Shared with the class.');complete(3);$('#share-film').disabled=true;
+});
+
+/* ---------- scene 4: tips + preview ---------- */
+function buildTips(){
+  $('#tips').innerHTML=TIPS.map(t=>'<li>'+t+'</li>').join('');
+  $('#preview').innerHTML=FIVE.map((f,i)=>'<b>'+(i+1)+'. '+esc(f.q)+'</b><br>'+
+    f.o.map((o,j)=>'&nbsp;&nbsp;'+'ABC'[j]+') '+esc(o)).join('<br>')).join('<br><br>');
+}
+$('#ready').addEventListener('click',()=>{
+  if($('#keyw').value.trim().length<2){toast('Write the key word from question 3 first.');return;}
+  award(4,'Ready to listen.');complete(4);$('#ready').disabled=true;
+});
+
+/* ---------- scene 5: five questions ---------- */
+const pick5=Array(5).fill(null);
+function buildFive(){
+  const box=$('#five');box.innerHTML='';
+  FIVE.forEach((f,i)=>{
+    const d=document.createElement('div');d.className='q';
+    d.innerHTML='<h4><i>'+(i+1)+'</i><span>'+esc(f.q)+'</span></h4>';
+    f.o.forEach((o,j)=>{
+      const b=document.createElement('button');b.className='opt';b.textContent='ABC'[j]+'.  '+o;
+      b.dataset.i=i;b.dataset.j=j;
+      b.onclick=()=>{pick5[i]=j;d.querySelectorAll('.opt').forEach(x=>x.classList.remove('chosen'));b.classList.add('chosen');};
+      d.appendChild(b);
+    });
+    box.appendChild(d);
+  });
+}
+$('#check-five').addEventListener('click',()=>{
+  if(pick5.includes(null)){toast('Answer all five questions first.');return;}
+  let right=0;
+  FIVE.forEach((f,i)=>{
+    const opts=$$('.opt[data-i="'+i+'"]');
+    opts.forEach(o=>o.classList.remove('chosen'));
+    opts[f.k].classList.add('ok');
+    if(pick5[i]===f.k)right++;else opts[pick5[i]].classList.add('no');
+  });
+  S.fiveScore=right;
+  $('#fivescore').textContent=right+' out of 5 correct.';
+  award(right*6,right+'/5 correct.');
+  buildKey();
+  if(right>=3)complete(5);
+});
+function buildKey(){
+  $('#answerkey').innerHTML='<div class="eyebrow">Answer key · why</div>'+
+    FIVE.map((f,i)=>'<div class="tip on" style="margin-top:10px"><b>'+(i+1)+'. '+esc(f.o[f.k])+'</b><br>'+esc(f.why)+'</div>').join('');
+}
+
+/* ---------- scene 6: transcript ---------- */
+function buildTranscript(){
+  $('#tr-int').innerHTML='<div class="eyebrow" style="margin-bottom:8px">Audio script · Weekend Culture</div>'+
+    INTERVIEW.map((l,i)=>'<p data-l="'+i+'"><b>'+(l.v?'NADIA':'HOST')+':</b> '+l.t+'</p>').join('');
+}
+
+/* ---------- scene 7: fact hunt ---------- */
+function renderQList(){
+  $('#qcount').textContent=QUIZ.length;
+  $('#qlist').innerHTML=QUIZ.map(q=>'<li>'+esc(q.q)+' <span style="opacity:.6">— '+esc(q.by)+'</span></li>').join('');
+}
+$('#add-q').addEventListener('click',()=>{
+  const f=$('#fact').value.trim(),q=$('#qtext').value.trim(),a=$('#qans').value.trim();
+  if(!f||!q||!a){toast('Fill in the fact, the question and the answer.');return;}
+  if(!/\?$/.test(q)){toast('A question needs a question mark at the end.');return;}
+  QUIZ.push({q,a,by:S.student.name});
+  $('#fact').value='';$('#qtext').value='';$('#qans').value='';
+  renderQList();award(10,'Question added to the quiz.');complete(7);
+});
+
+/* ---------- scene 8: quiz show ---------- */
+let qi=0;const SCORES=[0,0,0,0];
+function renderQuiz(){
+  if(!QUIZ.length)return;
+  qi=Math.min(qi,QUIZ.length-1);
+  const q=QUIZ[qi];
+  $('#qn').textContent='QUESTION '+(qi+1)+' OF '+QUIZ.length+' · BY '+q.by.toUpperCase();
+  $('#qbody').textContent=q.q;
+  $('#qans-out').textContent=q.a;
+  $('#qans-out').classList.remove('on');
+  const t=$('#teams');t.innerHTML='';
+  ['Team 1','Team 2','Team 3','Team 4'].forEach((n,i)=>{
+    const d=document.createElement('div');d.className='team';
+    d.innerHTML='<div style="font-family:var(--mono);font-size:.7rem">'+n+'</div><b>'+SCORES[i]+'</b>';
+    const b=document.createElement('button');b.textContent='+1';
+    b.onclick=()=>{SCORES[i]++;renderQuiz();rain(4);};
+    d.appendChild(b);t.appendChild(d);
+  });
+}
+$('#reveal').addEventListener('click',()=>{$('#qans-out').classList.add('on');complete(8);});
+$('#qnext').addEventListener('click',()=>{qi=(qi+1)%QUIZ.length;renderQuiz();});
+$('#qprev').addEventListener('click',()=>{qi=(qi-1+QUIZ.length)%QUIZ.length;renderQuiz();});
+
+/* ---------- scene 9: results ---------- */
+function showResults(){
+  $('#finalamt').textContent=S.fp+' FP';
+  $('#b1').style.width=Math.round(S.fiveScore/5*100)+'%';
+  $('#b2').style.width=Math.round(S.spoke/2*100)+'%';
+  const t=S.fiveScore+S.spoke;
+  const m=t>=6?['SUPER','FAN','🏆']:t>=4?['CRITIC','IN TRAINING','🎬']:t>=2?['GOOD','START','⭐']:['KEEP','LISTENING','🎧'];
+  $('#medal').innerHTML='<div style="font-size:1.5rem">'+m[2]+'</div><div>'+m[0]+'<br>'+m[1]+'</div>';
+  rain(18);
+}
+
+/* ---------- boot ---------- */
+function buildAll(){
+  buildReel();buildSources();buildBoard();buildPoster();buildTips();buildFive();
+  buildTranscript();renderQList();paint();
+}
+</script>
+</body>
+</html>
